@@ -34,7 +34,6 @@
             <label for="{{ form.homeid.id_for_label }}">Home-ID:</label><br>
                         {{ form.homeid }}
                         {{ form.homeid.errors }}
-
         </div>
     </div>
     <div class="row">
@@ -42,13 +41,23 @@
             <button type="submit" class="btn btn-secondary">Home ID checken</button>
         </div>
     </div>
+        <br>
+        <br>
     <div class="row">
-        <div class="col text-center">
-            {{ result.check_num_status }}
+        <div class="col form-group text-center">
+            Eingegebene HomeID: {{ result.homeid_start }}
         </div>
-        <br>
-        <br>
-        <div class="col text-center">
+    </div>
+    <div class="row">
+        <div class="col form-group text-center">
+            Angepasste HomeID: {{ result.homeid_changed }}
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col form-group text-center">
+            Status: {{ result.check_num_status }}
         </div>
     </div>
     </form>

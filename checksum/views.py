@@ -4,12 +4,14 @@ from .forms import HomeidForm
 def homeid(request):
     if request.method == "POST":
         form = HomeidForm()
-
+        request.session['homeid_start'] = str(request.POST['homeid'])
         #lowercase to uppercase
         homeid = change_to_uppercase(str(request.POST['homeid']))
 
         #replce O to 0
         homeid = homeid.replace("O", "0")
+
+        request.session['homeid_changed'] = homeid
 
         # check length is 7
         length_status = check_length(homeid)
