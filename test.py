@@ -7,6 +7,9 @@ def main(homeid):
     homeid = change_to_uppercase(homeid)
     print(homeid)
 
+    # replace O to 0
+    homeid = homeid.replace("O", "0")
+
     # check length is 7
     print('Prüfen der String Länge auf 7 Zeichen')
     length_status = check_length(homeid)
@@ -32,6 +35,11 @@ def main(homeid):
         #exit()
 
     #check checksum of new Home ID
+    homeid = homeid.replace("V", "A")
+    homeid = homeid.replace("W", "E")
+    homeid = homeid.replace("X", "I")
+    homeid = homeid.replace("Y", "O")
+    homeid = homeid.replace("Z", "U")
     checksum = check_check_number(homeid)
     print(checksum)
 
@@ -58,7 +66,7 @@ def check_alphanumeric(homeid):
 
 
 def check_alter_standard(homeid):
-    if homeid[0] == 'A' or homeid[0] == 'B' or homeid[0] == 'C' or homeid[0] == 'D' or homeid[0] == 'F':
+    if homeid[0].isalpha():
         if homeid[1:7].isnumeric():
             alter_standard_status = True
         else:
@@ -71,42 +79,9 @@ def check_alter_standard(homeid):
 
 def check_check_number(homeid):
     alpha_to_num = {
-        "0": 0,
-        "1": 1,
-        "2": 2,
-        "3": 3,
-        "4": 4,
-        "5": 5,
-        "6": 6,
-        "7": 7,
-        "8": 8,
-        "9": 9,
-        "A": 10,
-        "B": 11,
-        "C": 12,
-        "D": 13,
-        "E": 14,
-        "F": 15,
-        "G": 16,
-        "H": 17,
-        "I": 18,
-        "J": 19,
-        "K": 20,
-        "L": 21,
-        "M": 22,
-        "N": 23,
-        "O": 24,
-        "P": 25,
-        "Q": 26,
-        "R": 27,
-        "S": 28,
-        "T": 29,
-        "U": 30,
-        "V": 10,
-        "W": 14,
-        "X": 18,
-        "Y": 24,
-        "Z": 30
+        "0": 0, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "A": 10, "B": 11, "C": 12,
+        "D": 13, "E": 14, "F": 15, "G": 16, "H": 17, "I": 18, "J": 19, "K": 20, "L": 21, "M": 22, "N": 23, "O": 24,
+        "P": 25, "Q": 26,"R": 27, "S": 28, "T": 29, "U": 30
     }
 
     if homeid[0].isnumeric():
@@ -143,12 +118,11 @@ def check_check_number(homeid):
 
     while digit_sum > 30:
         digit_sum = digit_sum - 31
-    #print(digit_sum)
+
     check_num = ''
     for x in alpha_to_num:
         if alpha_to_num[x] == digit_sum:
             check_num = x
-    #print(f'Letzte Ziffer Home-ID: {homeid[6]}; Ergebnis Checksumme: {check_num}')
 
     if homeid[6] == check_num:
         check_num_status = "Gültige Home-ID"

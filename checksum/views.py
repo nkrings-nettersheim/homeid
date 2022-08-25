@@ -8,7 +8,7 @@ def homeid(request):
         #lowercase to uppercase
         homeid = change_to_uppercase(str(request.POST['homeid']))
 
-        #replce O to 0
+        #replace O to 0
         homeid = homeid.replace("O", "0")
 
         request.session['homeid_changed'] = homeid
@@ -36,6 +36,11 @@ def homeid(request):
             return render(request, 'checksum/input.html', {'form': form, 'result': request.session})
 
         # check checksum of new Home ID
+        homeid = homeid.replace("V", "A")
+        homeid = homeid.replace("W", "E")
+        homeid = homeid.replace("X", "I")
+        homeid = homeid.replace("Y", "O")
+        homeid = homeid.replace("Z", "U")
         request.session['check_num_status'] = check_check_number(homeid)
 
         return render(request, 'checksum/input.html', {'form': form, 'result': request.session})
@@ -65,7 +70,7 @@ def check_alphanumeric(homeid):
 
 
 def check_alter_standard(homeid):
-    if homeid[0] == 'A' or homeid[0] == 'B' or homeid[0] == 'C' or homeid[0] == 'D' or homeid[0] == 'F':
+    if homeid[0].isalpha():
         if homeid[1:7].isnumeric():
             alter_standard_status = True
         else:
